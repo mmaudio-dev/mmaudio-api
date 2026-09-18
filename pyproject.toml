@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mmaudio-api"
+version = "0.1.0"
+description = "Python client for the MMAudio API — synchronised video-to-audio and text-to-audio generation via a hosted endpoint"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [{name = "mmaudio-dev"}]
+keywords = ["ai api", "mmaudio", "mmaudio api", "mmaudio python", "synexa"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["httpx>=0.24"]
+
+[project.urls]
+Homepage = "https://github.com/mmaudio-dev/mmaudio-api"
+Documentation = "https://mmaudio-dev.github.io/mmaudio-api/"
+"Hosted model" = "https://synexa.ai/explore/zsxkib/mmaudio"
+
+[tool.setuptools.packages.find]
+include = ["mmaudio_api*"]

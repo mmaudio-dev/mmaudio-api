@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MMAudio API — Python client &amp; hosted endpoint</title>
+<meta name="description" content="Python client for the MMAudio API — synchronised video-to-audio and text-to-audio generation via a hosted endpoint">
+<link rel="canonical" href="https://mmaudio-dev.github.io/mmaudio-api/"><meta name="google-site-verification" content="8NEKdWXBIiAKuN0mqEqYwTB3yB8iIW-_cQmXANbDTs8" /><meta name="msvalidate.01" content="91A75274D586670BEE99EC35A630C098">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there an MMAudio API?", "acceptedAnswer": {"@type": "Answer", "text": "The authors release MMAudio as open code and weights with a Gradio demo, not a hosted API. This package is a Python client for the zsxkib/mmaudio endpoint on Synexa, which serves the model behind an HTTPS API."}}, {"@type": "Question", "name": "How much does the MMAudio API cost?", "acceptedAnswer": {"@type": "Answer", "text": "The hosted endpoint is billed at $0.01 per run. There is no hourly charge and nothing to pay while idle. New Synexa accounts receive a free trial credit."}}, {"@type": "Question", "name": "Can I run MMAudio without a GPU?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. With this client generation happens on Synexa's GPUs; your code needs only Python 3.8+ and httpx. Self-hosting is designed around a CUDA GPU and requires downloading the MMAudio, Synchformer, CLIP and VAE checkpoints."}}, {"@type": "Question", "name": "Does this client work with the hkchengrex/MMAudio repo or ComfyUI?", "acceptedAnswer": {"@type": "Answer", "text": "No. It does not load local checkpoints or ComfyUI nodes; it is an HTTP client for the hosted endpoint. Use the official repository or its ComfyUI wrappers for offline inference or custom model variants."}}, {"@type": "Question", "name": "What input formats does it accept?", "acceptedAnswer": {"@type": "Answer", "text": "video must be a publicly reachable video file URL (MP4 is the safe choice) and prompt a string; both are required. Optional fields are negative_prompt (string), duration (seconds), num_steps (integer), cfg_strength (number) and seed (integer). Output is a URL to the video with the generated audio track."}}, {"@type": "Question", "name": "Is this the official MMAudio SDK?", "acceptedAnswer": {"@type": "Answer", "text": "No. This is an independent, MIT-licensed client and is not affiliated with the MMAudio authors, UIUC or Sony. The official project is at https://github.com/hkchengrex/MMAudio."}}]}</script>
+<style>
+:root{--ink:#16191d;--muted:#5b6470;--line:#e3e6ea;--accent:#2563eb;--bg:#fff}
+*{box-sizing:border-box}body{margin:0;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+main{max-width:860px;margin:0 auto;padding:48px 20px 80px}h1{font-size:34px;line-height:1.2;margin:0 0 12px}h2{font-size:22px;margin:40px 0 10px}
+.lead{font-size:18px;color:var(--muted)}.cta{display:inline-block;background:var(--accent);color:#fff;padding:12px 22px;border-radius:8px;font-weight:600;text-decoration:none;margin:12px 8px 12px 0}
+.ghost{display:inline-block;border:1px solid var(--line);padding:11px 20px;border-radius:8px;text-decoration:none;color:var(--ink)}
+pre{background:#0f172a;color:#e2e8f0;padding:16px;border-radius:10px;overflow:auto;font-size:14px}code{font-family:ui-monospace,Menlo,monospace}
+details{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0}summary{cursor:pointer;font-weight:600}
+footer{margin-top:56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:14px}
+</style></head><body><main>
+<h1>MMAudio API for Python</h1>
+<p class="lead">Python client for the MMAudio API — synchronised video-to-audio and text-to-audio generation via a hosted endpoint</p>
+<p><a class="cta" href="https://synexa.ai/explore/zsxkib/mmaudio" rel="noopener">Run MMAudio in the browser →</a> <a class="ghost" href="https://github.com/mmaudio-dev/mmaudio-api">View on GitHub</a></p>
+<h2>Install</h2>
+<pre><code>pip install git+https://github.com/mmaudio-dev/mmaudio-api.git
+export SYNEXA_API_KEY="sk-..."</code></pre>
+<h2>Quickstart</h2>
+<pre><code>import mmaudio_api
+
+output = mmaudio_api.run({
+    "video": "https://example.com/input.png",
+    "prompt": "galloping"
+})
+print(output)</code></pre>
+<h2>Hosted models</h2>
+<ul><li><a href="https://synexa.ai/explore/zsxkib/mmaudio" rel="noopener">zsxkib/mmaudio</a> — Add sound to video using the MMAudio V2 model. An advanced AI model that synthesizes high-quality audio from video content, enabling seamless video-to-audio transformation. <em>($0.01 / run)</em></li></ul>
+<h2>About MMAudio</h2>
+<p>MMAudio is a CVPR 2025 video-to-audio model from the University of Illinois Urbana-Champaign and Sony AI. A flow-matching transformer trained jointly on video-audio and text-audio data, it generates 44.1 kHz sound effects and ambience that are synchronised to on-screen events through a dedicated Synchformer-based timing module, guided by a text prompt and an optional negative prompt. This client calls the hosted zsxkib/mmaudio endpoint on Synexa, which runs the authors' MMAudio V2 checkpoint, so you can add sound to silent video from one Python function without a GPU.</p>
+<h2>FAQ</h2>
+<details><summary>Is there an MMAudio API?</summary><p>The authors release MMAudio as open code and weights with a Gradio demo, not a hosted API. This package is a Python client for the zsxkib/mmaudio endpoint on Synexa, which serves the model behind an HTTPS API.</p></details><details><summary>How much does the MMAudio API cost?</summary><p>The hosted endpoint is billed at $0.01 per run. There is no hourly charge and nothing to pay while idle. New Synexa accounts receive a free trial credit.</p></details><details><summary>Can I run MMAudio without a GPU?</summary><p>Yes. With this client generation happens on Synexa's GPUs; your code needs only Python 3.8+ and httpx. Self-hosting is designed around a CUDA GPU and requires downloading the MMAudio, Synchformer, CLIP and VAE checkpoints.</p></details><details><summary>Does this client work with the hkchengrex/MMAudio repo or ComfyUI?</summary><p>No. It does not load local checkpoints or ComfyUI nodes; it is an HTTP client for the hosted endpoint. Use the official repository or its ComfyUI wrappers for offline inference or custom model variants.</p></details><details><summary>What input formats does it accept?</summary><p>video must be a publicly reachable video file URL (MP4 is the safe choice) and prompt a string; both are required. Optional fields are negative_prompt (string), duration (seconds), num_steps (integer), cfg_strength (number) and seed (integer). Output is a URL to the video with the generated audio track.</p></details><details><summary>Is this the official MMAudio SDK?</summary><p>No. This is an independent, MIT-licensed client and is not affiliated with the MMAudio authors, UIUC or Sony. The official project is at https://github.com/hkchengrex/MMAudio.</p></details>
+<p><a class="cta" href="https://synexa.ai/explore/zsxkib/mmaudio" rel="noopener">Get an API key and run MMAudio →</a></p>
+<footer>Independent client for the hosted MMAudio endpoint on Synexa. Not affiliated with the model's authors. MIT licensed.</footer>
+</main></body></html>
